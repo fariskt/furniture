@@ -1,8 +1,9 @@
 import React, { createContext, useState } from "react";
 import { newArrival } from "../data";
 
-const CartContext = createContext();
+const AppContext = createContext();
 export const CartProvider = ({ children }) => {
+  const [data, setData] = useState(newArrival || []);
   const [cart, setCart] = useState([]);
 
   const addToCart = (id) => {
@@ -26,6 +27,8 @@ export const CartProvider = ({ children }) => {
   const cartCount = cart.length;
 
   const values = {
+    data,
+    setData,
     cart,
     setCart,
     addToCart,
@@ -33,10 +36,8 @@ export const CartProvider = ({ children }) => {
     cartCount,
   };
   return (
-    <CartContext.Provider value={{ ...values }}>
-      {children}
-    </CartContext.Provider>
+    <AppContext.Provider value={{ ...values }}>{children}</AppContext.Provider>
   );
 };
 
-export default CartContext;
+export default AppContext;

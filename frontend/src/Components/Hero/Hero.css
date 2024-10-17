@@ -1,0 +1,7 @@
+.traingle{
+    width: 0;
+    height: 0;
+    border-left: 700px solid transparent;  /* Base */
+    border-bottom: 600px solid #fff5bd;  
+    margin-top:10px;
+}

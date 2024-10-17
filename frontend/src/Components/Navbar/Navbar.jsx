@@ -3,7 +3,7 @@ import { BsCart2 } from "react-icons/bs";
 import { CgProfile } from "react-icons/cg";
 import { IoIosSearch } from "react-icons/io";
 import { Link } from "react-router-dom";
-import CartContext from "../../context/CartContext";
+import CartContext from "../../context/AppContext";
 
 const Navbar = () => {
   const { cartCount } = useContext(CartContext);

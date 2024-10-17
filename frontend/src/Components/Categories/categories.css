@@ -1,14 +1,13 @@
-.category p {
-  cursor: pointer;
-}
 .arr-div {
   position: relative;
   width: 95%;
   text-align: center;
 }
+
 .arr-div p {
   margin: 5px 0;
 }
+
 .arrival-img {
   opacity: 1;
   display: block;
@@ -21,18 +20,19 @@
     rgba(27, 31, 35, 0.15) 0px 0px 0px 1px;
   margin-bottom: 20px;
 }
+
 .middle {
-  transition: 0.5s ease;
+  transition: opacity 0.5s ease;
   opacity: 0;
   position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  -ms-transform: translate(-50%, -50%);
+  z-index: 55;
+  margin-top: 310px;
+  width: 100%;
   text-align: center;
 }
+
 .arr-div:hover .arrival-img {
-  opacity: 0.3;
+  opacity: 0.5;
   cursor: pointer;
   border: 1px solid black;
 }
@@ -42,10 +42,17 @@
 }
 
 .cart-btn {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  justify-content:center;
   color: black;
-  font-size: 4rem;
+  font-size: 1.2rem;
   cursor: pointer;
-  padding: 16px 32px;
-  margin-bottom: 80px;
+  margin-top: 30px;
+  height:65px;
+  background-color: black;
+  color: white;
+  width: 100%;
+  transition: opacity 0.5s ease;
 }
-

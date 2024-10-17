@@ -9,7 +9,7 @@ export const newArrival = [
   {
     id:1,
     img: "./products/sofa/sofa2.jpg",
-    name: "Two piece Sofa",
+    name: "Two piece Sofa Two piece Sofa Two piece SofaTwo piece",
     price: "450.00",
     category: "sofa",
   },

@@ -1,20 +1,28 @@
 import React, { useContext, useState } from "react";
 import "./categories.css";
+import { useNavigate } from "react-router-dom";
 import { newArrival } from "../../data";
 import { CiCirclePlus } from "react-icons/ci";
-import CartContext from "../../context/CartContext";
+import CartContext from "../../context/AppContext";
 
 const NewArrival = () => {
-  const { addToCart } = useContext(CartContext);
-  
+  const { addToCart, setData } = useContext(CartContext);
+
   const [active, setActive] = useState(0);
-  const [isHover, setIsHovered] = useState(null);
 
   const handleClick = (index) => {
     setActive(index);
   };
 
-  const categories = ["BED", "CHAIR",  "SOFA", "LIGHT", "TABLE"];
+  const navigate = useNavigate();
+  const handleProduct = (item, index) => {
+    if(item){
+      setData(item)
+    }
+    navigate(`/product/${index}`)
+  };
+
+  const categories = ["BED", "CHAIR", "SOFA", "LIGHT", "TABLE"];
 
   return (
     <>
@@ -24,6 +32,7 @@ const NewArrival = () => {
       <div className="flex justify-center gap-14 mt-8 mb-14 category">
         {categories.map((category, index) => (
           <p
+            className="cursor-pointer"
             key={index}
             style={{
               color: active === index ? "black" : "grey",
@@ -38,30 +47,28 @@ const NewArrival = () => {
 
       <div className="grid grid-cols-[1fr_1fr_1fr_1fr] gap-10 w-[90%] mx-auto">
         {newArrival
-          .filter((products) => products.category.toUpperCase() === categories[active])
+          .filter(
+            (products) => products.category.toUpperCase() === categories[active]
+          )
           .map((item, index) => (
-            <div
-              key={index}
-              className="arr-div"
-              onClick={() => addToCart(item.id)}
-              
-            >
-              {isHover === index && (
-                <div className="middle" title="gjgjhgj">
-                  <button className="cart-btn"> 
-                    <CiCirclePlus />
-                  </button>
-                </div>
-              )}
+            <div key={index} className="arr-div">
+              <div className="middle">
+                <h4
+                  className="cart-btn"
+                  title="Add to Cart"
+                  onClick={() => addToCart(item.id)}
+                >
+                  Add to Cart <CiCirclePlus />
+                </h4>
+              </div>
               <img
                 src={item.img}
-                onMouseEnter={() => setIsHovered(index)}
-                onMouseLeave={() => setIsHovered(null)}
                 alt="image"
                 className="arrival-img"
+                onClick={() => handleProduct(item, index)}
               />
               <p>{item.name}</p>
-              <p>{item.price}</p>
+              <p>$ {item.price}</p>
             </div>
           ))}
       </div>

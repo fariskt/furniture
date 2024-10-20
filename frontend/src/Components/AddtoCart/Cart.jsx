@@ -1,17 +1,20 @@
 import React, { useContext } from "react";
-import CartContext from "../../context/AppContext";
+import CartContext from "../../context/CartContext";
 import { MdDelete } from "react-icons/md";
 import { IoIosArrowBack } from "react-icons/io";
 import Summary from "./Summary";
-
 import { Link } from "react-router-dom";
 
 const Cart = () => {
   const { cart, removeFromCart, cartCount, setCart } = useContext(CartContext);
 
-  const total_price = cart.reduce((acc, val) => {
-    return acc + parseInt(val.price) * val.quantity;
-  }, 0);
+  let total_price = 0;
+
+  if (cart && cart.length > 0) {
+    total_price = cart.reduce((acc, val) => {
+      return acc + parseInt(val.price) * val.quantity;
+    }, 0);
+  }
 
   let discount = total_price * 0.1;
   const totalAfterDiscount = total_price - discount;
@@ -89,9 +92,8 @@ const Cart = () => {
                       </button>
                     </div>
                   </div>
-
                   <div>
-                    <p>$ {itemTotal}.00</p>
+                    <p>₹ {itemTotal}.00</p>
                   </div>
                 </div>
               );
@@ -119,6 +121,7 @@ const Cart = () => {
       </div>
       <Summary
         cartCount={cartCount}
+        cart={cart}
         total_price={total_price}
         totalAfterDiscount={totalAfterDiscount}
       />

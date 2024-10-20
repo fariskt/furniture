@@ -1,39 +1,25 @@
-import React, { createContext, useState } from "react";
-import { newArrival } from "../data";
+import React, { createContext, useEffect, useState } from "react";
+import axios from "axios";
 
 const AppContext = createContext();
-export const CartProvider = ({ children }) => {
-  const [data, setData] = useState(newArrival || []);
-  const [cart, setCart] = useState([]);
+export const AppProvider = ({ children }) => {
+  const [products, setProducts] = useState([]);
 
-  const addToCart = (id) => {
-    const product = newArrival.find((val) => val.id === id);
-
-    setCart((prevCart) => {
-      const itemInCart = prevCart.find((cartItem) => cartItem.id === id);
-      if (itemInCart) {
-        return prevCart;
-      } else {
-        return [...prevCart, { ...product, quantity: 1 }];
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get("http://localhost:3000/products");
+        setProducts(response.data);
+      } catch (error) {
+        console.error(error);
       }
-    });
-  };
-
-  const removeFromCart = (id) => {
-    const filteredItem = cart.filter((item, index) => index !== id);
-    setCart(filteredItem);
-  };
-
-  const cartCount = cart.length;
+    };
+    fetchData();
+  }, []);
 
   const values = {
-    data,
-    setData,
-    cart,
-    setCart,
-    addToCart,
-    removeFromCart,
-    cartCount,
+    products,
+    setProducts,
   };
   return (
     <AppContext.Provider value={{ ...values }}>{children}</AppContext.Provider>

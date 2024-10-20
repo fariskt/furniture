@@ -3,17 +3,20 @@ import { BsCart2 } from "react-icons/bs";
 import { CgProfile } from "react-icons/cg";
 import { IoIosSearch } from "react-icons/io";
 import { Link } from "react-router-dom";
-import CartContext from "../../context/AppContext";
+import CartContext from "../../context/CartContext";
 
 const Navbar = () => {
   const { cartCount } = useContext(CartContext);
+
   return (
     <nav className="fixed w-screen z-50 flex items-center justify-between bg-gray-200 px-12 py-5 top-0">
       <Link to="/">
-        <h2>LOGO</h2>
+        <h2 className="text-2xl font-bold">LuxSpace</h2>
       </Link>
       <ul className="flex justify-around gap-24 mr-12 text-base">
-        <li>HOME</li>
+        <Link to="/">
+          <li>HOME</li>
+        </Link>
         <li>SHOP</li>
         <li>PRODUCT</li>
         <li>ABOUT</li>
@@ -31,21 +34,21 @@ const Navbar = () => {
           <BsCart2 />
         </Link>
         <span
+          style={{ fontSize: "13px" }}
           className={
             cartCount > 0
-              ? "absolute ml-[88px] mt-[-10px] bg-black text-white h-[20px] w-[20px] pb-1 pl-[6px] rounded-full"
+              ? "absolute ml-[88px] mt-[-9px] bg-black text-center text-white h-[20px] w-[20px] pb-1 pt-[2px] pl-[2px] rounded-full"
               : "hidden"
           }
         >
           {cartCount > 0 ? cartCount : ""}
         </span>
-        <Link to='/login'>
-        <button className="text-2xl">
-          <CgProfile />
-          {/* Login */}
-        </button>
+        <Link to="/login">
+          <button className="text-2xl">
+            <CgProfile />
+            {/* Login */}
+          </button>
         </Link>
-          
       </div>
     </nav>
   );

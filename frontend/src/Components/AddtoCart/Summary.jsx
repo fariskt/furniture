@@ -8,7 +8,7 @@ const Summary = ({ totalAfterDiscount, total_price, cartCount }) => {
       </h2>
       <div className="flex justify-between my-2">
         <p>ITEMS {cartCount}</p>
-        <p className="font-bold">$ {total_price}.00</p>
+        <p className="font-bold">₹ {total_price}.00</p>
       </div>
       <p>SHIPPING</p>
       <input
@@ -26,7 +26,7 @@ const Summary = ({ totalAfterDiscount, total_price, cartCount }) => {
       />
       <div className="flex justify-between my-4">
         <h4>TOTAL PRICE</h4>
-        <h4 className="font-bold">$ {totalAfterDiscount}.00</h4>
+        <h4 className="font-bold">₹ {totalAfterDiscount}.00</h4>
       </div>
       <button className="bg-black text-white p-2 mt-6">CHECKOUT</button>
     </div>

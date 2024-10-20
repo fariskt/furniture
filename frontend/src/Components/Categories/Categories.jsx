@@ -1,12 +1,12 @@
-import React from 'react'
-import NewArrival from './NewArrival'
+import React from "react";
+import NewArrival from "./NewArrival";
 
-const Categories = () => {
+const Categories = ({ targetRef }) => {
   return (
-    <>
-    <NewArrival/>
-    </>
-  )
-}
+    <div ref={targetRef}>
+      <NewArrival />
+    </div>
+  );
+};
 
-export default Categories
+export default Categories;

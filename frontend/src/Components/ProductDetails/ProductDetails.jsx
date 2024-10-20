@@ -1,25 +1,49 @@
-import React, { useContext } from "react";
-import { useParams } from "react-router-dom";
+import React, { useContext, useState } from "react";
 import AppContext from "../../context/AppContext";
 import { MdOutlineFavoriteBorder } from "react-icons/md";
+import { useParams } from "react-router-dom";
+import CartContext from "../../context/CartContext";
 
 const ProductDetails = () => {
-  const { data } = useContext(AppContext);
-  
+  const { setCart, cart, } = useContext(CartContext);
+  const { products } = useContext(AppContext);
+  const [quantity, setQuantity] = useState(1);
+
+  const { id } = useParams();
+  const data = products.find((prd) => prd.id === id);
+
+  const updateCart = () => {
+    const itemCart = cart.find((item) => item.id === data.id);
+
+    if (itemCart) {
+      setCart(
+        cart.map((item) =>
+          item.id === data.id
+            ? { ...item, quantity: item.quantity + quantity }
+            : item
+        )
+      );
+    } else {
+      setCart([...cart, { ...data, quantity }]);
+    }
+  };
+
   return (
     <div className="flex justify-between mt-[150px] w-[90%] mx-auto">
       <div>
         <img
-          src={`/${data.img}`}
+          src={data.img}
           alt="product image"
-          className="w-[1200px] h-[500px] object-cover border"
+          className="w-[1200px] h-[500px] object-contain border border-gray-500"
         />
       </div>
       <div className="flex flex-col ml-14 gap-3 w-[60%]">
         <h1 className="text-4xl font-bold">{data.name}</h1>
-        <div className="flex items-center gap-4 pb-4 border-b">
-          <strike className="text-gray-400 text-lg font-bold">$100.00</strike>
-          <h3 className="text-xl font-bold">${data.price}</h3>
+        <div className="flex items-center gap-2 pb-4 border-b">
+          <strike className="text-gray-400 text-lg font-bold">
+            ₹{Math.trunc(data.price) + 120}.00
+          </strike>
+          <h3 className="text-xl font-bold">₹{data.price}</h3>
         </div>
         <p className="text-green-700">✅ In stock</p>
         <p className="w-[90%]">
@@ -28,14 +52,27 @@ const ProductDetails = () => {
           numquam incidunt eos impedit harum earum
         </p>
         <h5>Color: Red</h5>
-        <div className="flex items-center gap-4 my-4">
+        <div className="flex items-center gap-4 my-4 w-full">
           <div className="border border-gray-300 bg-white w-[150px] flex justify-center items-center">
-            <button className="py-2 px-4 font-extrabold border-r">-</button>
-            <button className="px-4 font-extrabold border-r">0</button>
-            <button className="py-2 px-4 font-extrabold border-l">+</button>
+            <button
+              className="py-2 px-4 font-extrabold border-r"
+              onClick={() => setQuantity(quantity > 1 ? quantity - 1 : 1)}
+            >
+              -
+            </button>
+            <button className="px-4 font-extrabold border-r">{quantity}</button>
+            <button
+              className="py-2 px-4 font-extrabold border-l"
+              onClick={() => setQuantity(quantity + 1)}
+            >
+              +
+            </button>
           </div>
           <div>
-            <button className="bg-black text-white py-3 w-[250px]">
+            <button
+              className="bg-black text-white py-3 w-[240px]"
+              onClick={() => updateCart(id)}
+            >
               ADD TO CART
             </button>
           </div>
@@ -50,7 +87,7 @@ const ProductDetails = () => {
           <span>I agree with terms and conditions</span>
         </div>
         <div className="my-4 w-full">
-          <button className="w-full border border-gray-400 p-4 bg-gray-800 text-white">
+          <button className="w-[90%] border border-gray-400 p-4 bg-gray-800 text-white">
             BUY NOW
           </button>
         </div>

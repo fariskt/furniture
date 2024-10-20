@@ -1,12 +1,13 @@
 import React, { useContext, useState } from "react";
 import "./categories.css";
 import { useNavigate } from "react-router-dom";
-import { newArrival } from "../../data";
 import { CiCirclePlus } from "react-icons/ci";
-import CartContext from "../../context/AppContext";
+import CartContext from "../../context/CartContext";
+import AppContext from "../../context/AppContext";
 
 const NewArrival = () => {
-  const { addToCart, setData } = useContext(CartContext);
+  const { addToCart } = useContext(CartContext);
+  const { products } = useContext(AppContext);
 
   const [active, setActive] = useState(0);
 
@@ -15,11 +16,9 @@ const NewArrival = () => {
   };
 
   const navigate = useNavigate();
-  const handleProduct = (item, index) => {
-    if(item){
-      setData(item)
-    }
-    navigate(`/product/${index}`)
+
+  const handleProduct = (item) => {
+    navigate(`/product/${item.id}`);
   };
 
   const categories = ["BED", "CHAIR", "SOFA", "LIGHT", "TABLE"];
@@ -46,7 +45,7 @@ const NewArrival = () => {
       </div>
 
       <div className="grid grid-cols-[1fr_1fr_1fr_1fr] gap-10 w-[90%] mx-auto">
-        {newArrival
+        {products
           .filter(
             (products) => products.category.toUpperCase() === categories[active]
           )
@@ -65,10 +64,10 @@ const NewArrival = () => {
                 src={item.img}
                 alt="image"
                 className="arrival-img"
-                onClick={() => handleProduct(item, index)}
+                onClick={() => handleProduct(item)}
               />
               <p>{item.name}</p>
-              <p>$ {item.price}</p>
+              <p>₹ {item.price}</p>
             </div>
           ))}
       </div>

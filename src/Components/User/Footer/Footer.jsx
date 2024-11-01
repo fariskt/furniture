@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 const Footer = () => {
   return (
     <>
-      <div id="footer" className="border-t border-gray-300 bg-black text-white mt-20 py-20 px-16 flex justify-between w-full mx-auto">
+      <div id="footer" className="border-t border-gray-300 bg-black text-white mt-20 py-20 px-16 flex flex-col md:flex-row justify-between w-full mx-auto">
         <div className="flex flex-col w-1/3 gap-4 text-gray-200">
           <Link to='/'><h1 className="text-4xl text-white font-bold mb-2">LuxSpace</h1></Link>
           <div className="flex items-center gap-3">
@@ -29,7 +29,7 @@ const Footer = () => {
             <h4>+91 9999888777</h4>
           </div>
         </div>
-        <div className="w-1/3 flex flex-col gap-4">
+        <div className="w-1/3 flex flex-col md:flex-col gap-4">
           <h4 className="text-md font-bold mt-4">INFORMATION</h4>
           <div className="text-gray-300 flex flex-col gap-4">
             <Link to="">
@@ -46,9 +46,9 @@ const Footer = () => {
             </Link>
           </div>
         </div>
-        <div className="w-1/3 text-md font-bold">
+        <div className="md:w-1/3 text-md font-bold">
           <h4>About us</h4>
-          <p className="w-full font-[500] text-gray-300 mt-6">
+          <p className=" font-[500] text-gray-300 mt-6">
             Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque
             ipsam, ea nam non, cum dolores ratione provident blanditiis ab enim
           </p>

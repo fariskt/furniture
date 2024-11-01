@@ -1,7 +1,12 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import Confetti from "react-confetti";
+import AppContext from "../../../context/AppContext";
+import axios from "axios";
+import CartContext from "../../../context/CartContext";
 
 const CartPayment = ({ setShowPayment, cart }) => {
+  const { setOrders, userId } = useContext(AppContext);
+  const { setCart } = useContext(CartContext);
   const [isOrdered, setIsOrdered] = useState(false);
   const modalRef = useRef(null);
 
@@ -9,11 +14,34 @@ const CartPayment = ({ setShowPayment, cart }) => {
     return acc + cur.price * cur.quantity;
   }, 0);
 
-  const placeOrder = () => {
-    setIsOrdered(true);
-    setTimeout(() => {
-      setIsOrdered(false);
-    }, 6000);
+  const placeOrder = async () => {
+    const orderItems = cart.map((item) => ({
+      productId: item.id,
+      img: item.img,
+      quantity: item.quantity,
+      price: item.price,
+    }));
+
+    const orderData = {
+      userId: userId,
+      items: orderItems,
+      totalAmount: total_price,
+      orderdate: new Date().toISOString(),
+    };
+    try {
+      setIsOrdered(true);
+      setTimeout(() => {
+        setIsOrdered(false);
+      }, 8000);
+      setCart([]);
+      await axios.patch(`http://localhost:3000/users/${userId}`, {
+        cart: [],
+      });
+      await axios.post("http://localhost:3000/orders", orderData);
+      setOrders((prevOrder) => [...prevOrder, orderData]);
+    } catch (error) {
+      console.log("Error adding orders ", error);
+    }
   };
 
   useEffect(() => {

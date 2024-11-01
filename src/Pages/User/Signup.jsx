@@ -9,14 +9,14 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
 const Signup = () => {
+  const navigate = useNavigate();
 
-  const navigate = useNavigate()
-  
   const initialValues = {
     name: "",
     email: "",
     password: "",
-    cart:[],
+    role:"user",
+    cart: [],
     cpassword: "",
   };
 
@@ -35,12 +35,19 @@ const Signup = () => {
 
   const handleSubmit = async (formData) => {
     const { name, email, password } = formData;
+    const date = new Date();
+
+    const createdAt = `${String(date.getDate()).padStart(2, "0")}/${String(
+      date.getMonth() + 1
+    ).padStart(2, "0")}/${date.getFullYear()}`;
 
     const userData = {
       name,
       email,
       password,
-      cart:[]
+      role:"user",
+      cart: [],
+      createdAt,
     };
     try {
       const response = await axios.post(
@@ -52,15 +59,15 @@ const Signup = () => {
           },
         }
       );
-      navigate("/login")
+      navigate("/login");
     } catch (error) {
       console.log(error);
     }
   };
 
-  useEffect(()=> {
-    window.scrollTo(0,0)
-  },[])
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div className="flex w-[70%] mt-[100px] mx-auto border-2 border-gray-400 rounded-lg justify-around">

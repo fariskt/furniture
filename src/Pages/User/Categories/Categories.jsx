@@ -9,13 +9,13 @@ const Categories = () => {
       <NewArrival />
       <div>
         <h1 className="text-4xl text-center mt-28 mb-10">OUR BRANDS</h1>
-        <div className="flex justify-center gap-24">
+        <div className="flex flex-col md:flex-row items-center justify-center md:gap-24">
           {brands.map((item, index) => (
             <img
               key={index}
               src={item}
               alt="brands"
-              className="h-28 object-cover w-22"
+              className="md:h-28 md:object-cover w-[200px] md:w-22 "
             />
           ))}
         </div>

@@ -1,14 +1,13 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import axios from "axios";
 import AppContext from "./AppContext";
+import Swal from "sweetalert2";
 
 const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
   const { userId } = useContext(AppContext);
-
   const [cart, setCart] = useState([]);
-  const [cartCount, setCartCount] = useState(0);
   const [cartQuantity, setCartQuantity] = useState(1);
 
   useEffect(() => {
@@ -19,10 +18,8 @@ export const CartProvider = ({ children }) => {
         );
         const storedCart = response.data.cart || [];
         setCart(storedCart);
-        setCartCount(storedCart.length);
       } catch (error) {
         console.error("Error fetching cart", error);
-        
       }
     };
     if (userId) loadCart();
@@ -30,7 +27,6 @@ export const CartProvider = ({ children }) => {
 
   const syncCart = async (updatedCart) => {
     setCart(updatedCart);
-    setCartCount(updatedCart.length);
     try {
       await axios.patch(`http://localhost:3000/users/${userId}`, {
         cart: updatedCart,
@@ -44,7 +40,16 @@ export const CartProvider = ({ children }) => {
     const itemExist = cart.find((product) => product.id === item.id);
     if (!itemExist) {
       const updatedCart = [...cart, { ...item, quantity: cartQuantity }];
+      Swal.fire({
+        text: "Item added to cart",
+        icon: "success",
+      });
       syncCart(updatedCart);
+    } else {
+      Swal.fire({
+        text: "Item already in cart",
+        icon: "warning",
+      });
     }
   };
 
@@ -58,9 +63,8 @@ export const CartProvider = ({ children }) => {
     setCart,
     addToCart,
     removeFromCart,
-    cartCount,
     cartQuantity,
-    setCartCount,
+
     setCartQuantity,
   };
 

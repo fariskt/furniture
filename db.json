@@ -1,0 +1,307 @@
+{
+  "users": [
+    {
+      "id": "454c",
+      "name": "admin",
+      "email": "admin@gmail.com",
+      "password": "admin123",
+      "role": "admin",
+      "createdAt": "31/10/2024"
+    },
+    {
+      "id": "731c",
+      "name": "faris",
+      "email": "faris@gmail.com",
+      "password": "nmnmnm",
+      "role": "user",
+      "cart": [],
+      "createdAt": "31/10/2024"
+    }
+  ],
+  "products": [
+    {
+      "id": "0447",
+      "img": "https://i.postimg.cc/sX4bWQGb/bed1.avif",
+      "name": "white modern bed",
+      "price": "550",
+      "color": "white",
+      "category": "bed"
+    },
+    {
+      "id": "68cc",
+      "img": "https://i.postimg.cc/nrd5dykk/bed2.webp",
+      "name": "gray normal bed",
+      "price": "550",
+      "color": "gray",
+      "category": "bed"
+    },
+    {
+      "id": "eeb8",
+      "img": "https://i.postimg.cc/Bbv71h01/bed3.webp",
+      "name": "Regular bed",
+      "price": "443",
+      "color": "brown",
+      "category": "bed"
+    },
+    {
+      "id": "62fc",
+      "img": "https://i.postimg.cc/Fs8C7gn7/bed4.jpg",
+      "name": "Wooden normal bed",
+      "price": "840",
+      "color": "brown",
+      "category": "bed"
+    },
+    {
+      "id": "f975",
+      "img": "https://i.postimg.cc/rmwNhKYB/table1.png",
+      "name": "Small four seat table",
+      "price": "840",
+      "color": "brown",
+      "category": "table"
+    },
+    {
+      "id": "23f3",
+      "img": "https://i.postimg.cc/NGrpZr0t/table3.png",
+      "name": "Stylish table",
+      "price": "2840",
+      "color": "blue",
+      "category": "table"
+    },
+    {
+      "id": "110b",
+      "img": "https://i.postimg.cc/Tw3Br2jw/light1.png",
+      "name": "Normal Lamp",
+      "price": "1240",
+      "color": "brown",
+      "category": "light"
+    },
+    {
+      "id": "31ca",
+      "img": "https://i.postimg.cc/mD0fBfMg/blue-sofa.png",
+      "name": "Blue single sofa",
+      "price": "2840",
+      "color": "blue",
+      "category": "sofa"
+    },
+    {
+      "id": "19c7",
+      "img": "https://i.postimg.cc/MZQJtH2M/sofa1.png",
+      "name": "Orange single sofa",
+      "price": "2240",
+      "color": "orange",
+      "category": "sofa"
+    },
+    {
+      "id": "dd8f",
+      "img": "https://i.postimg.cc/Rhr82153/sofa2.jpg",
+      "name": "Double sofa ",
+      "price": "3240",
+      "color": "orange",
+      "category": "sofa"
+    },
+    {
+      "id": "f904",
+      "img": "https://i.postimg.cc/HW5FXNXb/sofa3.avif",
+      "name": "White luxury sofa",
+      "price": "4240",
+      "color": "white",
+      "category": "sofa"
+    },
+    {
+      "id": "dccd",
+      "img": "https://e7.pngegg.com/pngimages/390/262/png-clipart-table-lamp-floor-tripod-wood-lamp-light-fixture-furniture.png",
+      "name": "Table Lamp white",
+      "price": "850",
+      "color": "white",
+      "category": "light"
+    },
+    {
+      "id": "2771",
+      "img": "https://img.freepik.com/free-vector/booth-table-chairs-made-from-white-plastic_107791-26178.jpg",
+      "name": "Restaurant Table",
+      "price": "4300",
+      "color": "white",
+      "category": "table"
+    },
+    {
+      "id": "117f",
+      "img": "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/3017d4d2-d9ed-46e2-9cab-6e35f053b458/davw0ul-d72ac06f-6a15-4481-9c98-52a339e064d2.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcLzMwMTdkNGQyLWQ5ZWQtNDZlMi05Y2FiLTZlMzVmMDUzYjQ1OFwvZGF2dzB1bC1kNzJhYzA2Zi02YTE1LTQ0ODEtOWM5OC01MmEzMzllMDY0ZDIucG5nIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.8t879-CeUJmuMrXB9oJvt4eW5CoPfqrpKA8Mi9DcwdM",
+      "name": "Wooden bed",
+      "price": "2800",
+      "color": "red",
+      "category": "bed"
+    },
+    {
+      "id": "1dab",
+      "img": "https://img.freepik.com/free-psd/luxury-blue-comfort-sofa-png-isolated-transparent-background_191095-9792.jpg",
+      "name": "Blue sofa",
+      "price": "3400",
+      "color": "blue",
+      "category": "sofa"
+    }
+  ],
+  "orders": [
+    {
+      "id": "3556",
+      "userId": null,
+      "items": [
+        {
+          "productId": "0447",
+          "img": "https://i.postimg.cc/sX4bWQGb/bed1.avif",
+          "quantity": 1,
+          "price": "550"
+        }
+      ],
+      "totalAmount": 450,
+      "orderdate": "2024-10-29T09:08:52.694Z"
+    },
+    {
+      "id": "410c",
+      "userId": null,
+      "items": [
+        {
+          "productId": "f904",
+          "img": "https://i.postimg.cc/HW5FXNXb/sofa3.avif",
+          "quantity": 3,
+          "price": "4240"
+        }
+      ],
+      "totalAmount": 12620,
+      "orderdate": "2024-10-29T09:09:01.808Z"
+    },
+    {
+      "id": "f393",
+      "userId": null,
+      "items": [
+        {
+          "productId": "23f3",
+          "img": "https://i.postimg.cc/NGrpZr0t/table3.png",
+          "quantity": 1,
+          "price": "2840"
+        }
+      ],
+      "totalAmount": 2740,
+      "orderdate": "2024-10-29T16:23:13.174Z"
+    },
+    {
+      "id": "2967",
+      "userId": null,
+      "items": [
+        {
+          "productId": "eeb8",
+          "img": "https://i.postimg.cc/Bbv71h01/bed3.webp",
+          "quantity": 2,
+          "price": "443"
+        }
+      ],
+      "totalAmount": 786,
+      "orderdate": "2024-10-29T16:26:01.391Z"
+    },
+    {
+      "id": "cbb7",
+      "userId": null,
+      "items": [
+        {
+          "productId": "0447",
+          "img": "https://i.postimg.cc/sX4bWQGb/bed1.avif",
+          "quantity": 1,
+          "price": "550"
+        }
+      ],
+      "totalAmount": 550,
+      "orderdate": "2024-10-30T11:40:04.720Z"
+    },
+    {
+      "id": "e935",
+      "userId": null,
+      "items": [
+        {
+          "productId": "0447",
+          "img": "https://i.postimg.cc/sX4bWQGb/bed1.avif",
+          "quantity": 1,
+          "price": "550"
+        }
+      ],
+      "totalAmount": 550,
+      "orderdate": "2024-10-31T04:48:39.216Z"
+    },
+    {
+      "id": "90ea",
+      "userId": "5733",
+      "items": [
+        {
+          "productId": "0447",
+          "img": "https://i.postimg.cc/sX4bWQGb/bed1.avif",
+          "quantity": 1,
+          "price": "550"
+        },
+        {
+          "productId": "eeb8",
+          "img": "https://i.postimg.cc/Bbv71h01/bed3.webp",
+          "quantity": 1,
+          "price": "443"
+        },
+        {
+          "productId": "62fc",
+          "img": "https://i.postimg.cc/Fs8C7gn7/bed4.jpg",
+          "quantity": 1,
+          "price": "840"
+        }
+      ],
+      "totalAmount": 1833,
+      "orderdate": "2024-10-31T04:53:21.880Z"
+    },
+    {
+      "id": "b99a",
+      "userId": "9891",
+      "items": [
+        {
+          "productId": "0447",
+          "img": "https://i.postimg.cc/sX4bWQGb/bed1.avif",
+          "quantity": 1,
+          "price": "550"
+        },
+        {
+          "productId": "68cc",
+          "img": "https://i.postimg.cc/nrd5dykk/bed2.webp",
+          "quantity": 1,
+          "price": "550"
+        },
+        {
+          "productId": "eeb8",
+          "img": "https://i.postimg.cc/Bbv71h01/bed3.webp",
+          "quantity": 1,
+          "price": "443"
+        }
+      ],
+      "totalAmount": 1543,
+      "orderdate": "2024-10-31T04:57:39.464Z"
+    },
+    {
+      "id": "59f5",
+      "userId": null,
+      "items": [
+        {
+          "productId": "68cc",
+          "img": "https://i.postimg.cc/nrd5dykk/bed2.webp",
+          "quantity": 1,
+          "price": "550"
+        },
+        {
+          "productId": "eeb8",
+          "img": "https://i.postimg.cc/Bbv71h01/bed3.webp",
+          "quantity": 1,
+          "price": "443"
+        },
+        {
+          "productId": "62fc",
+          "img": "https://i.postimg.cc/Fs8C7gn7/bed4.jpg",
+          "quantity": 1,
+          "price": "840"
+        }
+      ],
+      "totalAmount": 1833,
+      "orderdate": "2024-10-31T04:58:53.808Z"
+    }
+  ]
+}

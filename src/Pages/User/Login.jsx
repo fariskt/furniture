@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect } from "react";
 import { MdEmail } from "react-icons/md";
 import { IoIosLock } from "react-icons/io";
 import { Link, useNavigate } from "react-router-dom";
@@ -11,14 +11,9 @@ import CartContext from "../../context/CartContext";
 const Login = () => {
   const navigate = useNavigate();
 
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, []);
-
   const { setCart } = useContext(CartContext);
-  const { setIsLogin, isLogin,  userId ,setUserName, setUserId } =
+  const { setIsLogin, isLogin, setUserName, setUserId } =
     useContext(AppContext);
-  const [showAlert , setShowAlert] = useState(false)
 
   const initialValues = {
     email: "",
@@ -40,17 +35,20 @@ const Login = () => {
       const userCart = user.cart;
       if (user) {
         if (user.password === formData.password) {
-          localStorage.setItem("userId", user.id);
-          localStorage.setItem("userName", user.name);
+          sessionStorage.setItem("userId", user.id);
+          sessionStorage.setItem("userName", user.name);
+          sessionStorage.setItem("isLogin", true);
           setUserName(user.name);
           setUserId(user.id);
           setCart(userCart);
           setIsLogin(true);
-          setShowAlert(true)
-          setTimeout(()=> {
-            setShowAlert(false)
-            navigate("/");
-          },1000)
+          if (user.role === "admin") {
+            navigate("/admin");
+          } else {
+            setTimeout(() => {
+              navigate("/");
+            }, 800);
+          }
         } else {
           setErrors({ password: "Incorrect password" });
         }
@@ -135,7 +133,6 @@ const Login = () => {
                   className="bg-green-400 py-3 px-5 rounded-md text-white"
                 >
                   {isSubmitting ? "Logging in Please wait" : "Login"}
-                  {/* Login in */}
                 </button>
               </div>
             </Form>

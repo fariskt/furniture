@@ -5,44 +5,43 @@ import { useNavigate, useParams } from "react-router-dom";
 import CartContext from "../../../context/CartContext";
 import { TbTruckDelivery } from "react-icons/tb";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const ProductDetails = () => {
-  const { setCart, cart, cartQuantity, setCartQuantity, setCartCount } =
+  const { setCart, cart, cartQuantity, setCartQuantity } =
     useContext(CartContext);
   const { products, isLogin, userId } = useContext(AppContext);
   const { id } = useParams();
   const navigate = useNavigate();
   const data = products.find((prd) => prd.id === id);
-  
-  const updateCart = async () => {
+
+  const updateCart = () => {
     if (!isLogin) {
       navigate("/login");
       return;
     }
 
+    const itemCart = cart.find((item) => item.id === data.id);
     let updatedCart;
 
-    const itemCart = cart.find((item) => item.id === data.id);
-
-    if (!itemCart) {
-      updatedCart = [...cart, { ...data, quantity: cartQuantity }];
-    } else {
+    if (itemCart) {
       updatedCart = cart.map((item) =>
         item.id === data.id ? { ...item, quantity: cartQuantity } : item
       );
+      Swal.fire({
+        text: "Item already in cart",
+        icon: "warning",
+      });
+    } else {
+      updatedCart = [...cart, { ...data, quantity: cartQuantity }];
+      Swal.fire({
+        text: "Item added to cart",
+        icon: "success",
+      });
     }
 
     setCart(updatedCart);
-    setCartCount(updatedCart.length);
-
-    try {
-      await axios.patch(`http://localhost:3000/users/${userId}`, {
-        cart: updatedCart,
-      });
-    } catch (error) {
-      console.error("Error updating cart", error);
-      setCart(cart);
-    }
+    axios.patch(`http://localhost:3000/users/${userId}`, { cart: updatedCart });
   };
 
   const handlePayment = (data) => {
@@ -52,6 +51,10 @@ const ProductDetails = () => {
   useEffect(() => {
     window.scrollTo(0, 0);
   }, []);
+
+  useEffect(() => {
+    setCartQuantity(1);
+  }, [id, setCartQuantity]);
 
   return (
     <div className="flex justify-between pt-[150px] w-[90%] mx-auto">
@@ -76,7 +79,7 @@ const ProductDetails = () => {
           ullam quaerat ex sequi maxime in sapiente ipsa. Facere distinctio
           numquam incidunt eos impedit harum earum
         </p>
-        <h5>Color: Red</h5>
+        <h5>color : {data.color}</h5>
         <div className="flex items-center gap-4 my-4 w-full">
           <div className="border border-gray-300 bg-white w-[150px] flex justify-center items-center">
             <button

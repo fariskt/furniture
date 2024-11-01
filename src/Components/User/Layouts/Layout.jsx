@@ -5,12 +5,12 @@ import Footer from "../Footer/Footer";
 
 const Layout = () => {
   const location = useLocation();
-  const hideNavbarRoutes = ["/login", "/signup"];
-  const shouldHideNavbar = hideNavbarRoutes.includes(location.pathname);
+  const hideRoutes = ["/login", "/signup"];
+  const HideNavbar = hideRoutes.includes(location.pathname);
 
   return (
     <>
-      {!shouldHideNavbar && <Navbar />}
+      {!HideNavbar && <Navbar />}
       <Outlet />
       <Footer />
     </>

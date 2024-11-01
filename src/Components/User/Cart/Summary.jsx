@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import CartPayment from "./CartPayment";
 
-const Summary = ({ totalAfterDiscount, total_price, cartCount ,cart}) => {
+const Summary = ({ totalAfterDiscount, total_price, cart}) => {
   const [showPayment, setShowPayment] = useState(false);
 
 
@@ -10,12 +10,12 @@ const Summary = ({ totalAfterDiscount, total_price, cartCount ,cart}) => {
   };
   return (
     <>
-      <div className="summary bg-gray-300 py-6 px-6 w-[400px] rounded-r-md flex flex-col gap-4">
+      <div className="summary bg-gray-300 py-6 px-6 md:w-[400px] rounded-r-md flex flex-col gap-4">
         <h2 className="text-2xl font-bold border-b-2 border-gray-100 mt-8 py-3">
           Summary
         </h2>
         <div className="flex justify-between my-2">
-          <p>ITEMS {cartCount}</p>
+          <p>ITEMS {cart.length}</p>
           <p className="font-bold">₹ {total_price}.00</p>
         </div>
         <p>SHIPPING</p>

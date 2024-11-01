@@ -10,10 +10,9 @@ import Signup from "./Pages/User/Signup";
 import ProductDetails from "./Pages/User/ProductDetails/ProductDetails";
 import Payment from "./Pages/User/PaymentPage/Payment";
 import Layout from "./Components/User/Layouts/Layout";
-import DashBoard from "./Pages/Admin/DashBoard";
 import AdminLayout from "./Components/Admin/AdminLayout/AdminLayout";
-import AdminProducts from "./Pages/Admin/AdminProducts";
-import AdminLogin from "./Pages/Admin/AdminLogin";
+import Product from "./Pages/User/ProductDetails/Product";
+import Orders from "./Pages/User/Orders/Orders";
 
 function App() {
   return (
@@ -22,20 +21,18 @@ function App() {
         <AppProvider>
           <CartProvider>
             <Routes>
-              <Route path="/" element={<Layout/>}>
+              <Route path="/" element={<Layout />}>
                 <Route index element={<Home />} />
                 <Route path="/categories" element={<Categories />} />
+                <Route path="/products" element={<Product />} />
                 <Route path="/product/:id" element={<ProductDetails />} />
                 <Route path="/cart" element={<Cart />} />
+                <Route path="/orders" element={<Orders />} />
                 <Route path="/payment/:id" element={<Payment />} />
               </Route>
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
-              <Route path="/admin" element={<AdminLayout/>}>
-                <Route path="/admin/dashboard" element={<DashBoard/>}/>
-                <Route path="/admin/products" element={<AdminProducts/>}/>
-              </Route>
-              <Route path="/admin/login" element={<AdminLogin/>}/>
+              <Route path="/admin" element={<AdminLayout />} />
             </Routes>
           </CartProvider>
         </AppProvider>

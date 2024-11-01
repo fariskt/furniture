@@ -4,15 +4,19 @@ import { useNavigate } from "react-router-dom";
 import { CiCirclePlus } from "react-icons/ci";
 import CartContext from "../../../context/CartContext";
 import AppContext from "../../../context/AppContext";
+import { FaChevronDown } from "react-icons/fa6";
+import { FaChevronUp } from "react-icons/fa";
 
 const NewArrival = () => {
   const { addToCart } = useContext(CartContext);
   const { products, isLogin } = useContext(AppContext);
 
   const [active, setActive] = useState(0);
+  const [visibleProducts, setVisibleProducts] = useState(4);
 
   const handleClick = (index) => {
     setActive(index);
+    setVisibleProducts(4);
   };
 
   const navigate = useNavigate();
@@ -22,6 +26,10 @@ const NewArrival = () => {
   };
 
   const categories = ["BED", "SOFA", "LIGHT", "TABLE"];
+
+  const filteredProducts = products.filter(
+    (product) => product.category.toUpperCase() === categories[active]
+  );
 
   return (
     <>
@@ -44,38 +52,58 @@ const NewArrival = () => {
         ))}
       </div>
 
-      <div className="grid grid-cols-[1fr_1fr_1fr_1fr] gap-10 w-[90%] mx-auto">
-        {products
-          .filter(
-            (products) => products.category.toUpperCase() === categories[active]
-          )
-          .map((item, index) => (
-            <div key={index} className="arr-div">
-              <div className="middle">
-                <h4
-                  className="cart-btn"
-                  title="Add to Cart"
-                  onClick={() => {
-                    if (isLogin) {
-                      addToCart(item);
-                    }else {
-                      navigate('/login')
-                    }
-                  }}
-                >
-                  Add to Cart <CiCirclePlus />
-                </h4>
-              </div>
-              <img
-                src={item.img}
-                alt="image"
-                className="arrival-img"
-                onClick={() => handleProduct(item)}
-              />
-              <p>{item.name}</p>
-              <p>₹ {item.price}</p>
+      <div className="grid md:grid-cols-[1fr_1fr_1fr_1fr] md:gap-10 md:[90%] w-[80%] mx-auto">
+        {filteredProducts.slice(0, visibleProducts).map((item, index) => (
+          <div key={index} className="arr-div">
+            <div className="middle">
+              <h4
+                className="cart-btn"
+                title="Add to Cart"
+                onClick={() => {
+                  if (isLogin) {
+                    addToCart(item);
+                  } else {
+                    navigate("/login");
+                  }
+                }}
+              >
+                Add to Cart <CiCirclePlus />
+              </h4>
             </div>
-          ))}
+            <img
+              src={item.img}
+              alt="image"
+              className="arrival-img"
+              onClick={() => handleProduct(item)}
+            />
+            <p>{item.name}</p>
+            <p>₹ {item.price}</p>
+          </div>
+        ))}
+      </div>
+      <div className="flex justify-end w-[90%] mx-auto mt-6 space-x-4">
+        {visibleProducts < filteredProducts.length && (
+          <button
+            onClick={() => setVisibleProducts(visibleProducts + 4)}
+            className="flex items-center gap-1 shadow-sm px-2 py-1 text-sm border-2 border-blue-300 rounded-xl"
+          >
+            SEE ALL
+            <span className="text-blue-600">
+              <FaChevronDown />
+            </span>
+          </button>
+        )}
+        {visibleProducts > 4 && (
+          <button
+            onClick={() => setVisibleProducts(4)}
+            className="flex items-center gap-1 shadow-sm px-2 py-1 text-sm border-2 border-blue-300 rounded-xl"
+          >
+            Show Less
+            <span className="text-blue-600">
+              <FaChevronUp />
+            </span>
+          </button>
+        )}
       </div>
     </>
   );

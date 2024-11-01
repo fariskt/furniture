@@ -3,18 +3,42 @@ import { useParams } from "react-router-dom";
 import AppContext from "../../../context/AppContext";
 import Confetti from "react-confetti";
 import { IoMdClose } from "react-icons/io";
+import CartContext from "../../../context/CartContext";
+import axios from "axios";
 
 const Payment = () => {
   const { id } = useParams();
-  const { products, quantity } = useContext(AppContext);
+  const { products, userId ,setOrders} = useContext(AppContext);
+  console.log(userId);
+  
+  const { cartQuantity } = useContext(CartContext);
   const [isOrder, setIsOrder] = useState(false);
   const productToOrder = products.find((item) => item.id === id);
 
-  const placeOrder = () => {
-    setIsOrder(true);
-    setTimeout(() => {
-      setIsOrder(false);
-    }, 8000);
+  const placeOrder = async () => {
+    const orderData = {
+      userId: userId,
+      items: [
+        {
+          productId: productToOrder.id,
+          img: productToOrder.img,
+          quantity: cartQuantity,
+          price: productToOrder.price,
+        },
+      ],
+      totalAmount: productToOrder.price * cartQuantity - 100,
+      orderdate: new Date().toISOString()
+    };
+    try {
+      setIsOrder(true);
+      setTimeout(() => {
+        setIsOrder(false);
+      }, 8000);
+      await axios.post("http://localhost:3000/orders", orderData);
+      setOrders((prevOrder)=> [...prevOrder , orderData])
+    } catch (error) {
+      console.log("Error adding orders ", error);
+    }
   };
 
   return (
@@ -93,7 +117,7 @@ const Payment = () => {
 
       <div className="w-full max-w-md border border-gray-300 bg-white rounded-lg shadow-lg p-6">
         <h1 className="text-2xl font-bold">Order Summary</h1>
-        <h4 className="text-gray-600">{quantity} Items</h4>
+        <h4 className="text-gray-600">{cartQuantity} Items</h4>
 
         <div className="border-b border-gray-400 py-4 flex items-center gap-4">
           <img
@@ -103,7 +127,7 @@ const Payment = () => {
           />
           <div className="flex flex-col">
             <h4 className="font-bold text-gray-700">
-              Price: ₹ {productToOrder.price * quantity}
+              Price: ₹ {productToOrder.price * cartQuantity}
             </h4>
             <h5 className="text-sm text-gray-500">
               Name: {productToOrder.name}
@@ -111,14 +135,14 @@ const Payment = () => {
             <h5 className="text-sm text-gray-500">
               Color: {productToOrder.color}
             </h5>
-            <h5 className="text-sm text-gray-500">Quantity: {quantity}</h5>
+            <h5 className="text-sm text-gray-500">Quantity: {cartQuantity}</h5>
           </div>
         </div>
 
         <div className="flex flex-col mt-4">
           <div className="flex justify-between my-2">
             <h5>Subtotal</h5>
-            <h5>₹ {productToOrder.price * quantity}</h5>
+            <h5>₹ {productToOrder.price * cartQuantity}</h5>
           </div>
           <div className="flex justify-between my-2">
             <h5>Delivery</h5>
@@ -130,7 +154,7 @@ const Payment = () => {
           </div>
           <div className="flex justify-between font-bold text-lg mt-2">
             <h5>Total to pay</h5>
-            <h5>₹ {productToOrder.price * quantity - 100}.00</h5>
+            <h5>₹ {productToOrder.price * cartQuantity - 100}.00</h5>
           </div>
         </div>
 

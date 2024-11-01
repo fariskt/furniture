@@ -6,10 +6,8 @@ import Summary from "./Summary";
 import { Link } from "react-router-dom";
 
 const Cart = () => {
-  const { cart, removeFromCart, cartCount, setCart  , cartQuantity} = useContext(CartContext);
-  console.log("whyfikuf ", cartQuantity);
+  const { cart, removeFromCart, setCart  } = useContext(CartContext);
   
-  console.log(cart);
   
   let total_price = 0;
 
@@ -44,18 +42,18 @@ const Cart = () => {
 
   return (
     <div
-      className="flex mt-28 w-[70%] mx-auto justify-between shadow-md border rounded-md"
+      className="flex flex-col md:flex-row mt-28 w-[90%] md:w-[70%]  mx-auto justify-between shadow-md border rounded-md"
       style={{ minHeight: "500px" }}
     >
       <div className="py-4 px-8 w-full">
         <div className="flex justify-between border-b-2 py-6 items-center">
           <h1 className="text-2xl p-2 font-bold mb-2">Shopping Cart</h1>
           <h3 className="text-md mr-4 font-bold text-gray-600">
-            {cartCount} items
+            {cart.length} items
           </h3>
         </div>
         <div
-          className="flex flex-col  gap-10 py-6 h-[400px]  w-[700px] overflow-y-auto"
+          className="flex flex-col  gap-10 py-6 h-[400px]  md:w-[700px] overflow-y-auto"
           style={{ maxHeight: "400px" }}
         >
           {cart.length > 0 ? (
@@ -64,14 +62,14 @@ const Cart = () => {
               return (
                 <div
                   key={index}
-                  className="flex justify-center gap-8 border-b py-4 items-center"
+                  className="flex flex-col md:flex-row justify-center gap-8 border-b py-4 items-center"
                 >
                   <img
                     src={item.img}
                     className="w-[100px] h-[100px]"
                     alt="an image"
                   />
-                  <div className="flex flex-col gap-2 w-[400px]">
+                  <div className="flex flex-col gap-2 md:w-[400px]">
                     <p>Type: {item.category}</p>
                     <p className="w-fit">Name : {item.name}</p>
                     <div className="border border-gray-300 rounded-md bg-white w-[120px] flex  items-center">
@@ -127,7 +125,6 @@ const Cart = () => {
         </div>
       </div>
       <Summary
-        cartCount={cartCount}
         cart={cart}
         total_price={total_price}
         totalAfterDiscount={totalAfterDiscount}

@@ -4,19 +4,22 @@ import axios from "axios";
 const AppContext = createContext();
 export const AppProvider = ({ children }) => {
   const [products, setProducts] = useState(() => {
-    const savedProducts = localStorage.getItem("products");
+    const savedProducts = sessionStorage.getItem("products");
     return savedProducts ? JSON.parse(savedProducts) : [];
   });
 
+  const [orders, setOrders] = useState([]);
+
   const [isLogin, setIsLogin] = useState(() => {
-    return localStorage.getItem("isLogin") === "true";
+    return sessionStorage.getItem("isLogin") === "true";
   });
   const [userId, setUserId] = useState(() => {
-    return localStorage.getItem("userId") || "";
+    return sessionStorage.getItem("userId") || "";
   });
   const [userName, setUserName] = useState(() => {
-    return localStorage.getItem("userName") || "";
+    return sessionStorage.getItem("userName") || "";
   });
+  const [users, setUsers] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -31,12 +34,29 @@ export const AppProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("products", JSON.stringify(products));
-  }, [products]);
+    const fetchUsers = async () => {
+      const response = await axios.get("http://localhost:3000/users");
+      setUsers(response.data);
+    };
+    fetchUsers();
+  }, []);
 
   useEffect(() => {
-    localStorage.setItem("isLogin", isLogin);
-  }, [isLogin]);
+    const fetchOrders = async () => {
+      try {
+        const response = await axios.get('http://localhost:3000/orders');
+        setOrders(response.data);
+      } catch (error) {
+        console.error(error);
+      }
+    };
+    fetchOrders();
+  }, []);
+
+  useEffect(() => {
+    sessionStorage.setItem("products", JSON.stringify(products));
+  }, [products]);
+
 
   const values = {
     products,
@@ -47,6 +67,10 @@ export const AppProvider = ({ children }) => {
     userId,
     setUserName,
     userName,
+    setUsers,
+    users,
+    orders,
+    setOrders,
   };
 
   return (

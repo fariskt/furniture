@@ -6,7 +6,7 @@ const ProtectedAdmin = ({ children }) => {
   const { isAdminLogin } = useContext(AppContext);
     
   if (!isAdminLogin) {
-    return <Navigate to="/login" replace />;
+    return <Navigate to="/login" replace={true} />;
   }
   return children;
 };

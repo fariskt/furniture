@@ -58,11 +58,11 @@ const ProductDetails = () => {
 
   return (
     <div className="flex justify-between pt-[150px] w-[90%] mx-auto">
-      <div>
+      <div className="max-w-[1200px] max-h-[500px] border border-gray-500 rounded-md">
         <img
           src={data.img}
           alt="product image"
-          className="w-[1200px] h-[500px] object-contain border border-gray-500 rounded-md"
+          className="w-[1100px] h-[400px] object-contain mt-10 hover:scale-105 duration-150"
         />
       </div>
       <div className="flex flex-col ml-14 gap-3 w-[60%]">

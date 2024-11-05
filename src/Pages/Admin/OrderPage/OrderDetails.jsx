@@ -3,47 +3,64 @@ import AppContext from "../../../context/AppContext";
 
 const OrderDetails = () => {
   const { orders } = useContext(AppContext);
+  console.log(orders);
+
   return (
-    <div className="container pt-28 mx-auto py-4 px-20 bg-gray-100 min-h-[90vh]">
-      <h1 className="text-3xl font-bold text-gray-800 mb-8">Orders</h1>
+    <div className="container pt-28 mx-auto py-8 px-10 bg-gray-50 min-h-[90vh]">
+      <h1 className="text-4xl font-bold text-gray-900 mb-10 text-center">
+        Orders
+      </h1>
       {orders.length > 0 ? (
-        <div className="flex flex-col space-y-8">
+        <div className="grid gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
           {orders.map((order, index) => (
             <div
               key={index}
-              className="bg-white border rounded-lg p-6 shadow-lg"
+              className="bg-white border rounded-xl p-8 shadow-md hover:shadow-lg transition-shadow duration-300"
             >
-              <h2 className="text-xl font-semibold text-gray-700 mb-2">
+              <h2 className="text-lg font-semibold text-gray-800 mb-4">
+                Username: {order.username}
+              </h2>
+              <h2 className="text-lg font-semibold text-gray-800 mb-4">
                 Order ID: {order.id}
               </h2>
-              <p className="text-gray-600 mb-2">
+              <p className="text-sm text-gray-600 mb-2">
                 Order Date: {new Date(order.orderdate).toLocaleDateString()}
               </p>
-              <div className="text-gray-800 font-bold mb-4">
+              <div className="text-lg text-gray-800 font-bold mb-6">
                 Total: ₹{order.totalAmount}
               </div>
-              <div className="border-t border-gray-300 pt-4">
-                <h3 className="font-semibold mb-2">Items:</h3>
-                {order.items.map((item) => (
-                  <div key={item.productId} className="flex mb-4">
-                    <img
-                      src={item.img}
-                      alt="product"
-                      className="w-20 h-20 object-cover rounded-md mb-2"
-                    />
-                    <div className="ml-4">
-                      <p>Product ID: {item.productId}</p>
-                      <p>Quantity: {item.quantity}</p>
-                      <p>Price: ₹{item.price}</p>
+
+              <div className="border-t border-gray-200 pt-4">
+                <h3 className="font-semibold text-gray-700 mb-4">Items:</h3>
+                <div className="space-y-4">
+                  {order.items.map((item, index) => (
+                    <div
+                      key={index}
+                      className="flex items-center space-x-4 bg-gray-50 p-4 rounded-lg"
+                    >
+                      <img
+                        src={item.img}
+                        alt="product"
+                        className="w-16 h-16 object-cover rounded-md shadow-sm"
+                      />
+                      <div>
+                        <p className="text-gray-800 font-semibold">
+                          Product ID: {item.productId}
+                        </p>
+                        <p className="text-gray-600">
+                          Quantity: {item.quantity}
+                        </p>
+                        <p className="text-gray-600">Price: ₹{item.price}</p>
+                      </div>
                     </div>
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             </div>
           ))}
         </div>
       ) : (
-        <p className="text-gray-600">No orders found</p>
+        <p className="text-gray-600 text-center">No orders found</p>
       )}
     </div>
   );

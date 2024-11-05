@@ -12,7 +12,7 @@ const Login = () => {
   const navigate = useNavigate();
 
   const { setCart } = useContext(CartContext);
-  const { setIsLogin, isLogin, setUserName, setUserId } =
+  const { setIsLogin, isLogin, setUserName, setUserId, setIsAdminLogin } =
     useContext(AppContext);
 
   const initialValues = {
@@ -35,16 +35,18 @@ const Login = () => {
       const userCart = user.cart;
       if (user) {
         if (user.password === formData.password) {
-          sessionStorage.setItem("userId", user.id);
-          sessionStorage.setItem("userName", user.name);
-          sessionStorage.setItem("isLogin", true);
-          setUserName(user.name);
-          setUserId(user.id);
-          setCart(userCart);
-          setIsLogin(true);
           if (user.role === "admin") {
             navigate("/admin");
-          } else {
+            setIsAdminLogin(true);
+            sessionStorage.setItem("isAdminLogin", true);
+          } else if (user.role === "user") {
+            sessionStorage.setItem("userId", user.id);
+            sessionStorage.setItem("userName", user.name);
+            sessionStorage.setItem("isLogin", true);
+            setUserName(user.name);
+            setUserId(user.id);
+            setCart(userCart);
+            setIsLogin(true);
             setTimeout(() => {
               navigate("/");
             }, 800);

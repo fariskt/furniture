@@ -4,8 +4,10 @@ import { IoIosArrowBack } from "react-icons/io";
 
 const UserDetails = ({ selectedUser, setShowDetails, orders }) => {
   const [isUserBlocked, setIsUserBlocked] = useState(selectedUser.isBlocked);
+  console.log(orders);
 
-  const handleBlockUser = async (newStatus) => {
+  const handleBlockUser = async () => {
+    const newStatus = !isUserBlocked;
     try {
       await axios.patch(`http://localhost:3000/users/${selectedUser.id}`, {
         isBlocked: newStatus,
@@ -68,22 +70,12 @@ const UserDetails = ({ selectedUser, setShowDetails, orders }) => {
                 </div>
                 <div className="flex items-center gap-6">
                   <button
-                    className={`${
-                      isUserBlocked ? "bg-red-300" : "bg-red-600"
-                    } px-4 py-2  text-white rounded-md`}
-                    onClick={() => handleBlockUser(true)}
-                    disabled={isUserBlocked}
-                  >
-                    Block
-                  </button>
-                  <button
                     className={` ${
-                      !isUserBlocked ? "bg-green-400" : "bg-green-600"
+                      !isUserBlocked ? "bg-red-600" : "bg-green-600"
                     } px-4 py-2  text-white rounded-md`}
-                    onClick={() => handleBlockUser(false)}
-                    disabled={!isUserBlocked}
+                    onClick={handleBlockUser}
                   >
-                    Unblock
+                    {isUserBlocked ? "Unblock" : "Block"}
                   </button>
                 </div>
               </div>
@@ -91,60 +83,68 @@ const UserDetails = ({ selectedUser, setShowDetails, orders }) => {
           </div>
 
           <div className="space-y-6">
-            <h2 className="font-semibold text-xl text-gray-800">Orders</h2>
-            {orders && orders.length > 0 ? (
-              orders.map((order, index) => (
-                <div
-                  key={index}
-                  className="bg-gray-50 border rounded-lg p-6 shadow-inner space-y-4"
-                >
-                  <div className="flex justify-between items-center">
-                    <p className="text-lg font-semibold text-gray-700">
-                      Order ID:{" "}
-                      <span className="text-gray-600">{order.id}</span>
-                    </p>
-                    <p className="text-gray-600">
-                      Date: {new Date(order.orderdate).toLocaleDateString()}
-                    </p>
-                  </div>
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                    {order.items.map((item, idx) => (
-                      <div
-                        key={idx}
-                        className="flex items-center space-x-4 bg-white p-4 rounded-lg shadow-md"
-                      >
-                        <img
-                          src={item.img}
-                          alt={`Product ${item.productId}`}
-                          className="w-20 h-20 object-cover rounded-md border border-gray-300"
-                        />
+            <h2 className="font-semibold text-2xl text-gray-800">Orders</h2>
+            <div className="bg-white border rounded-lg p-6 shadow-lg space-y-6">
+              {orders && orders.length > 0 ? (
+                orders
+                  .filter((order) => order.userId === selectedUser.id)
+                  .map((order, index) => (
+                    <div
+                      key={index}
+                      className="border-b pb-6 mb-6 last:border-none last:pb-0 last:mb-0"
+                    >
+                      <div className="flex justify-between items-center mb-4">
                         <div className="space-y-1">
-                          <h3 className="text-lg font-semibold text-gray-800">
-                            Product ID: {item.productId}
-                          </h3>
-                          <p className="text-gray-600">
-                            Quantity: {item.quantity}
+                          <p className="text-lg font-semibold text-gray-700">
+                            Order ID:{" "}
+                            <span className="text-gray-600">{order.id}</span>
                           </p>
-                          <p className="text-gray-600">
-                            Price:
-                            <span className="text-blue-600 font-semibold">
-                              ${item.price}
-                            </span>
+                          <p className="text-gray-500">
+                            Date:{" "}
+                            {new Date(order.orderdate).toLocaleDateString()}
                           </p>
                         </div>
+                        <div className="text-lg font-semibold text-blue-600">
+                          Total: ${order.totalAmount}
+                        </div>
                       </div>
-                    ))}
-                  </div>
-                  <p className="text-lg font-semibold text-gray-700 mt-4">
-                    Total Amount:{" "}
-                    <span className="text-blue-600">${order.totalAmount}</span>
-                  </p>
-                </div>
-              ))
-            ) : (
-              <p className="text-gray-500">No orders found</p>
-            )}
+
+                      <div className="grid grid-cols-1 md:grid-cols-1 gap-6 bg-gray-50 p-4 rounded-lg shadow-inner">
+                        {order.items.map((item, idx) => (
+                          <div
+                            key={idx}
+                            className="flex items-center space-x-4 bg-white p-4 rounded-lg shadow-md"
+                          >
+                            <img
+                              src={item.img}
+                              alt={`Product ${item.productId}`}
+                              className="w-20 h-20 object-cover rounded-md border border-gray-300"
+                            />
+                            <div className="space-y-1">
+                              <h3 className="text-lg font-semibold text-gray-800">
+                                {item.name}{" "}
+                              </h3>
+                              <p className="text-gray-500">
+                                Quantity: {item.quantity}
+                              </p>
+                              <p className="text-gray-500">
+                                Price:{" "}
+                                <span className="text-gray-600 text-sm">
+                                  ${item.price}
+                                </span>
+                              </p>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  ))
+              ) : (
+                <p className="text-gray-500 text-center">No orders found</p>
+              )}
+            </div>
           </div>
+
           <div className="space-y-6">
             <h2 className="font-semibold text-xl text-gray-800">Cart</h2>
             {selectedUser.cart && selectedUser.cart.length > 0 ? (

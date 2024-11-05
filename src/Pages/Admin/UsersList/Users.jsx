@@ -51,40 +51,42 @@ const Users = () => {
                 </tr>
               </thead>
               <tbody className="text-gray-600 text-sm font-light">
-                {users.map((item, index) => (
-                  <tr
-                    key={index}
-                    className="border-b border-gray-200 hover:bg-gray-50"
-                  >
-                    <td className="py-3 px-6 text-left flex items-center space-x-3">
-                      <img
-                        src="https://t4.ftcdn.net/jpg/00/65/77/27/360_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg"
-                        alt="User"
-                        className="w-16 h-16 rounded bg-white border border-gray-200"
-                      />
-                      <div>
-                        <p className="font-semibold">{item.name}</p>
-                        <p className="text-gray-500 text-sm">{item.email}</p>
-                      </div>
-                    </td>
-                    <td className="py-2 px-6">{item.createdAt}</td>
-                    <td className="py-2 px-6 text-center">
-                      <button
-                        title="view"
-                        onClick={() => handleViewDetails(item)}
-                        className="mx-4 text-lg bg-blue-100 rounded-lg py-2 px-4 text-blue-600 hover:bg-blue-700 hover:text-white"
-                      >
-                        <AiOutlineEye />
-                      </button>
-                      <button
-                        onClick={() => handleDeleteUser(item.id)}
-                        className="text-lg bg-red-100 rounded-lg py-2 px-4 text-red-400 hover:bg-red-500 hover:text-white"
-                      >
-                        <AiOutlineDelete />
-                      </button>
-                    </td>
-                  </tr>
-                ))}
+                {users
+                  .filter((user) => user.role === "user")
+                  .map((item, index) => (
+                    <tr
+                      key={index}
+                      className="border-b border-gray-200 hover:bg-gray-50"
+                    >
+                      <td className="py-3 px-6 text-left flex items-center space-x-3">
+                        <img
+                          src="https://t4.ftcdn.net/jpg/00/65/77/27/360_F_65772719_A1UV5kLi5nCEWI0BNLLiFaBPEkUbv5Fv.jpg"
+                          alt="User"
+                          className="w-16 h-16 rounded bg-white border border-gray-200"
+                        />
+                        <div>
+                          <p className="font-semibold">{item.name}</p>
+                          <p className="text-gray-500 text-sm">{item.email}</p>
+                        </div>
+                      </td>
+                      <td className="py-2 px-6">{item.createdAt}</td>
+                      <td className="py-2 px-6 text-center">
+                        <button
+                          title="view"
+                          onClick={() => handleViewDetails(item)}
+                          className="mx-4 text-lg bg-blue-100 rounded-lg py-2 px-4 text-blue-600 hover:bg-blue-700 hover:text-white"
+                        >
+                          <AiOutlineEye />
+                        </button>
+                        <button
+                          onClick={() => handleDeleteUser(item.id)}
+                          className="text-lg bg-red-100 rounded-lg py-2 px-4 text-red-400 hover:bg-red-500 hover:text-white"
+                        >
+                          <AiOutlineDelete />
+                        </button>
+                      </td>
+                    </tr>
+                  ))}
               </tbody>
             </table>
           </div>

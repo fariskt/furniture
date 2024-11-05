@@ -5,10 +5,14 @@ import react from '@vitejs/plugin-react';
 export default defineConfig({
   plugins: [react()],
   server: {
-    host: true, // Allow external access
-    port: process.env.PORT || 3000, // Use PORT from environment variable, default to 3000
+    port: 4000,  // Set your desired port here
   },
   build: {
-    outDir: 'dist', // Specify the output directory for production builds
+    outDir: 'dist',  // Output directory for build files
+  },
+  resolve: {
+    alias: {
+      '@': '/src',  // Alias for src folder, so you can use @/components instead of relative paths
+    },
   },
 });

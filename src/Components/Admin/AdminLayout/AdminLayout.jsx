@@ -19,6 +19,7 @@ const AdminLayout = () => {
     users: <Users />,
     orders: <OrderDetails />
   };
+  
 
   return (
     <div className="flex w-full" style={{ backgroundColor: "#f1f5f9" }}>

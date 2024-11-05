@@ -6,7 +6,8 @@
       "email": "admin@gmail.com",
       "password": "admin123",
       "role": "admin",
-      "createdAt": "31/10/2024"
+      "createdAt": "31/10/2024",
+      "isBlocked": false
     },
     {
       "id": "731c",
@@ -15,7 +16,18 @@
       "password": "nmnmnm",
       "role": "user",
       "cart": [],
-      "createdAt": "31/10/2024"
+      "createdAt": "31/10/2024",
+      "isBlocked": false
+    },
+    {
+      "id": "0b6a",
+      "name": "ishan",
+      "email": "ishan@gmail.com",
+      "password": "shanu47",
+      "role": "user",
+      "cart": [],
+      "createdAt": "03/11/2024",
+      "isBlocked": true
     }
   ],
   "products": [
@@ -23,7 +35,7 @@
       "id": "0447",
       "img": "https://i.postimg.cc/sX4bWQGb/bed1.avif",
       "name": "white modern bed",
-      "price": "550",
+      "price": "559",
       "color": "white",
       "category": "bed"
     },
@@ -111,7 +123,7 @@
       "id": "dccd",
       "img": "https://e7.pngegg.com/pngimages/390/262/png-clipart-table-lamp-floor-tripod-wood-lamp-light-fixture-furniture.png",
       "name": "Table Lamp white",
-      "price": "850",
+      "price": "1215",
       "color": "white",
       "category": "light"
     },
@@ -142,166 +154,116 @@
   ],
   "orders": [
     {
-      "id": "3556",
-      "userId": null,
+      "id": "43d6",
+      "userId": "731c",
+      "username": "faris",
       "items": [
         {
-          "productId": "0447",
+          "id": "0447",
           "img": "https://i.postimg.cc/sX4bWQGb/bed1.avif",
-          "quantity": 1,
-          "price": "550"
+          "name": "white modern bed",
+          "price": "550",
+          "color": "white",
+          "category": "bed",
+          "quantity": 1
+        },
+        {
+          "id": "62fc",
+          "img": "https://i.postimg.cc/Fs8C7gn7/bed4.jpg",
+          "name": "Wooden normal bed",
+          "price": "840",
+          "color": "brown",
+          "category": "bed",
+          "quantity": 1
+        }
+      ],
+      "totalAmount": 1390,
+      "orderdate": "2024-11-02T16:03:45.520Z"
+    },
+    {
+      "id": "b936",
+      "userId": "731c",
+      "username": "faris",
+      "items": [
+        {
+          "id": "0447",
+          "img": "https://i.postimg.cc/sX4bWQGb/bed1.avif",
+          "name": "white modern bed",
+          "price": "550",
+          "color": "white",
+          "category": "bed"
         }
       ],
       "totalAmount": 450,
-      "orderdate": "2024-10-29T09:08:52.694Z"
+      "orderdate": "2024-11-02T16:06:41.754Z"
     },
     {
-      "id": "410c",
-      "userId": null,
+      "id": "ce60",
+      "userId": "731c",
+      "username": "faris",
       "items": [
         {
-          "productId": "f904",
-          "img": "https://i.postimg.cc/HW5FXNXb/sofa3.avif",
-          "quantity": 3,
-          "price": "4240"
+          "id": "110b",
+          "img": "https://i.postimg.cc/Tw3Br2jw/light1.png",
+          "name": "Normal Lamp",
+          "price": "1240",
+          "color": "brown",
+          "category": "light"
         }
       ],
-      "totalAmount": 12620,
-      "orderdate": "2024-10-29T09:09:01.808Z"
+      "totalAmount": 1140,
+      "orderdate": "2024-11-02T16:06:51.036Z"
     },
     {
-      "id": "f393",
-      "userId": null,
+      "id": "a314",
+      "userId": "731c",
+      "username": "faris",
       "items": [
         {
-          "productId": "23f3",
+          "id": "23f3",
           "img": "https://i.postimg.cc/NGrpZr0t/table3.png",
-          "quantity": 1,
-          "price": "2840"
+          "name": "Stylish table",
+          "price": "2840",
+          "color": "blue",
+          "category": "table"
         }
       ],
       "totalAmount": 2740,
-      "orderdate": "2024-10-29T16:23:13.174Z"
+      "orderdate": "2024-11-02T16:06:58.006Z"
     },
     {
-      "id": "2967",
-      "userId": null,
+      "id": "a807",
+      "userId": "0b6a",
+      "username": "ishan",
       "items": [
         {
-          "productId": "eeb8",
-          "img": "https://i.postimg.cc/Bbv71h01/bed3.webp",
-          "quantity": 2,
-          "price": "443"
+          "id": "f904",
+          "img": "https://i.postimg.cc/HW5FXNXb/sofa3.avif",
+          "name": "White luxury sofa",
+          "price": "4240",
+          "color": "white",
+          "category": "sofa"
         }
       ],
-      "totalAmount": 786,
-      "orderdate": "2024-10-29T16:26:01.391Z"
+      "totalAmount": 4140,
+      "orderdate": "2024-11-03T10:41:54.600Z"
     },
     {
-      "id": "cbb7",
-      "userId": null,
+      "id": "d4eb",
+      "userId": "0b6a",
+      "username": "ishan",
       "items": [
         {
-          "productId": "0447",
-          "img": "https://i.postimg.cc/sX4bWQGb/bed1.avif",
-          "quantity": 1,
-          "price": "550"
+          "id": "f904",
+          "img": "https://i.postimg.cc/HW5FXNXb/sofa3.avif",
+          "name": "White luxury sofa",
+          "price": "4240",
+          "color": "white",
+          "category": "sofa"
         }
       ],
-      "totalAmount": 550,
-      "orderdate": "2024-10-30T11:40:04.720Z"
-    },
-    {
-      "id": "e935",
-      "userId": null,
-      "items": [
-        {
-          "productId": "0447",
-          "img": "https://i.postimg.cc/sX4bWQGb/bed1.avif",
-          "quantity": 1,
-          "price": "550"
-        }
-      ],
-      "totalAmount": 550,
-      "orderdate": "2024-10-31T04:48:39.216Z"
-    },
-    {
-      "id": "90ea",
-      "userId": "5733",
-      "items": [
-        {
-          "productId": "0447",
-          "img": "https://i.postimg.cc/sX4bWQGb/bed1.avif",
-          "quantity": 1,
-          "price": "550"
-        },
-        {
-          "productId": "eeb8",
-          "img": "https://i.postimg.cc/Bbv71h01/bed3.webp",
-          "quantity": 1,
-          "price": "443"
-        },
-        {
-          "productId": "62fc",
-          "img": "https://i.postimg.cc/Fs8C7gn7/bed4.jpg",
-          "quantity": 1,
-          "price": "840"
-        }
-      ],
-      "totalAmount": 1833,
-      "orderdate": "2024-10-31T04:53:21.880Z"
-    },
-    {
-      "id": "b99a",
-      "userId": "9891",
-      "items": [
-        {
-          "productId": "0447",
-          "img": "https://i.postimg.cc/sX4bWQGb/bed1.avif",
-          "quantity": 1,
-          "price": "550"
-        },
-        {
-          "productId": "68cc",
-          "img": "https://i.postimg.cc/nrd5dykk/bed2.webp",
-          "quantity": 1,
-          "price": "550"
-        },
-        {
-          "productId": "eeb8",
-          "img": "https://i.postimg.cc/Bbv71h01/bed3.webp",
-          "quantity": 1,
-          "price": "443"
-        }
-      ],
-      "totalAmount": 1543,
-      "orderdate": "2024-10-31T04:57:39.464Z"
-    },
-    {
-      "id": "59f5",
-      "userId": null,
-      "items": [
-        {
-          "productId": "68cc",
-          "img": "https://i.postimg.cc/nrd5dykk/bed2.webp",
-          "quantity": 1,
-          "price": "550"
-        },
-        {
-          "productId": "eeb8",
-          "img": "https://i.postimg.cc/Bbv71h01/bed3.webp",
-          "quantity": 1,
-          "price": "443"
-        },
-        {
-          "productId": "62fc",
-          "img": "https://i.postimg.cc/Fs8C7gn7/bed4.jpg",
-          "quantity": 1,
-          "price": "840"
-        }
-      ],
-      "totalAmount": 1833,
-      "orderdate": "2024-10-31T04:58:53.808Z"
+      "totalAmount": 71980,
+      "orderdate": "2024-11-03T10:42:28.309Z"
     }
   ]
 }

@@ -8,7 +8,7 @@ import axios from "axios";
 
 const Payment = () => {
   const { id } = useParams();
-  const { products, userId ,setOrders} = useContext(AppContext);
+  const { products, userId ,setOrders,userName} = useContext(AppContext);
   console.log(userId);
   
   const { cartQuantity } = useContext(CartContext);
@@ -18,14 +18,8 @@ const Payment = () => {
   const placeOrder = async () => {
     const orderData = {
       userId: userId,
-      items: [
-        {
-          productId: productToOrder.id,
-          img: productToOrder.img,
-          quantity: cartQuantity,
-          price: productToOrder.price,
-        },
-      ],
+      username:userName,
+      items: [productToOrder],
       totalAmount: productToOrder.price * cartQuantity - 100,
       orderdate: new Date().toISOString()
     };

@@ -5,7 +5,7 @@ import axios from "axios";
 import CartContext from "../../../context/CartContext";
 
 const CartPayment = ({ setShowPayment, cart }) => {
-  const { setOrders, userId } = useContext(AppContext);
+  const { setOrders, userId ,userName} = useContext(AppContext);
   const { setCart } = useContext(CartContext);
   const [isOrdered, setIsOrdered] = useState(false);
   const modalRef = useRef(null);
@@ -15,16 +15,10 @@ const CartPayment = ({ setShowPayment, cart }) => {
   }, 0);
 
   const placeOrder = async () => {
-    const orderItems = cart.map((item) => ({
-      productId: item.id,
-      img: item.img,
-      quantity: item.quantity,
-      price: item.price,
-    }));
-
     const orderData = {
       userId: userId,
-      items: orderItems,
+      username: userName,
+      items: cart,
       totalAmount: total_price,
       orderdate: new Date().toISOString(),
     };

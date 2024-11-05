@@ -1,6 +1,5 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
-import AppContext from "../../../context/AppContext";
 import Swal from "sweetalert2";
 
 const ProductForm = ({
@@ -10,7 +9,7 @@ const ProductForm = ({
   addProduct,
   updateProduct,
 }) => {
-  const { setProducts } = useContext(AppContext);
+  
   const [formData, setFormData] = useState({
     id: String(Date.now()),
     name: "",
@@ -35,20 +34,6 @@ const ProductForm = ({
     }
   }, [selectedProduct]);
 
-
-  const fetchProducts = async () => {
-    try {
-      const response = await axios.get("http://localhost:3000/products");
-      setProducts(response.data);
-      
-    } catch (error) {
-      console.error("Error fetching products:", error);
-    }
-  };
-
-  useEffect(() => {
-    fetchProducts();
-  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

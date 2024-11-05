@@ -65,7 +65,7 @@ const Product = () => {
         ))}
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 pt-6 p-6 w-[90%] mx-auto">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 pt-6 p-6 w-[90%] mx-auto">
         {filteredProducts.map((item, index) => (
           <div
             key={index}
@@ -75,7 +75,7 @@ const Product = () => {
               src={item.img}
               alt={item.name}
               title="view details"
-              className="w-48 h-40 bg-white object-contain cursor-pointer mx-auto my-4 rounded"
+              className="w-full h-48 bg-white object-contain cursor-pointer mx-auto rounded"
               onClick={() => handleProduct(item)}
             />
             <div className="p-4 text-center space-y-2">

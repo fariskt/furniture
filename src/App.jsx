@@ -13,6 +13,7 @@ import Layout from "./Components/User/Layouts/Layout";
 import AdminLayout from "./Components/Admin/AdminLayout/AdminLayout";
 import Product from "./Pages/User/ProductDetails/Product";
 import Orders from "./Pages/User/Orders/Orders";
+import ProtectedAdmin from "./Components/Admin/ProtectedAdmin";
 
 function App() {
   return (
@@ -32,7 +33,14 @@ function App() {
               </Route>
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
-              <Route path="/admin" element={<AdminLayout />} />
+              <Route
+                path="/admin"
+                element={
+                  <ProtectedAdmin>
+                    <AdminLayout />
+                  </ProtectedAdmin>
+                }
+              />
             </Routes>
           </CartProvider>
         </AppProvider>

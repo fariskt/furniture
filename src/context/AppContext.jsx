@@ -20,6 +20,9 @@ export const AppProvider = ({ children }) => {
     return sessionStorage.getItem("userName") || "";
   });
   const [users, setUsers] = useState([]);
+  const [isAdminLogin , setIsAdminLogin] = useState(()=>{
+    return sessionStorage.getItem("isAdminLogin") || null
+  })
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,7 +39,8 @@ export const AppProvider = ({ children }) => {
   useEffect(() => {
     const fetchUsers = async () => {
       const response = await axios.get("http://localhost:3000/users");
-      setUsers(response.data);
+      const users = response.data.filter((user)=> user.role !== "admin")
+      setUsers(users);
     };
     fetchUsers();
   }, []);
@@ -71,6 +75,8 @@ export const AppProvider = ({ children }) => {
     users,
     orders,
     setOrders,
+    isAdminLogin,
+    setIsAdminLogin
   };
 
   return (
